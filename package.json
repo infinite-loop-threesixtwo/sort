@@ -1,7 +1,7 @@
 {
   "name": "sort",
   "version": "0.1.0",
-  "homepge": "https://infinite-loop-threesixtwo.github.io/sort/",
+  "homepage": "https://infinite-loop-threesixtwo.github.io/sort/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
