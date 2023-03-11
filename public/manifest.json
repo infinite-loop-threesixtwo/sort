@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Algorithm Visualizer",
+  "name": "Interactive platform to turn code into data structure/algorithm visualizations",
   "icons": [
     {
       "src": "favicon.ico",
