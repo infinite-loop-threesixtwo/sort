@@ -23,21 +23,15 @@ function SortingVisualizer() {
         bars[j + 1].style.backgroundColor = 'red';
         await new Promise((resolve) =>
           setTimeout(() => {
-            // Debug Print Statements (delete in production)
-            console.log(newArray)
-            console.log("i " + i + " j " + j)
-            console.log("array[i] " + newArray[i] + " array[j] " + newArray[j])
             if (newArray[j] > newArray[j + 1]) {
               // Swap elements
               const temp = newArray[j];
               newArray[j] = newArray[j + 1];
               newArray[j + 1] = temp;
-              setArray(newArray);
+              bars[j].style.height = `${newArray[j]/5}px`;
+              bars[j+1].style.height = `${newArray[j+1]/5}px`;
             }
-            
             // Update visuals
-            bars[j].style.height = `${newArray[j]/5}px`
-            bars[j+1].style.height = `${newArray[j]/5}px`
             bars[j].style.backgroundColor = 'blue';
             bars[j + 1].style.backgroundColor = 'blue';
             resolve();
