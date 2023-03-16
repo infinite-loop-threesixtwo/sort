@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import './App.css';
 
 function SortingVisualizer() {
+  //This is hacky since it calls the if statement constantly but it works
+  useEffect(() => {
+        if(!document.getElementsByClassName('bar').length) generateArray();
+     });
   const [array, setArray] = useState([]);
 
   // Generate random array
@@ -19,8 +24,8 @@ function SortingVisualizer() {
     for (let i = 0; i < len; i++) {
       for (let j = 0; j < len - i - 1; j++) {
         const bars = document.getElementsByClassName('bar');
-        bars[j].style.backgroundColor = 'red';
-        bars[j + 1].style.backgroundColor = 'red';
+        bars[j].style.backgroundColor = '#001F54';
+        bars[j + 1].style.backgroundColor = '#001F54';
         await new Promise((resolve) =>
           setTimeout(() => {
             if (newArray[j] > newArray[j + 1]) {
@@ -32,8 +37,8 @@ function SortingVisualizer() {
               bars[j+1].style.height = `${newArray[j+1]/5}px`;
             }
             // Update visuals
-            bars[j].style.backgroundColor = 'blue';
-            bars[j + 1].style.backgroundColor = 'blue';
+            bars[j].style.backgroundColor = '#1282A2';
+            bars[j + 1].style.backgroundColor = '#1282A2';
             resolve();
           }, 1000) // Set speed
         );
@@ -42,7 +47,14 @@ function SortingVisualizer() {
   };
 
   return (
+
     <div className="visualizer">
+      <div className="title">
+        Bubble Sort
+      </div>
+      <div className="description">
+        Bubble sort is a simple algorithm that repeatedly compares adjacent elements in a list and swaps them if they are in the wrong order until the list is in order <br></br><b>Time complexity: O(N^2)</b>
+      </div>
       <div className="bars-container">
         {array.map((value, index) => (
           <div
@@ -50,7 +62,7 @@ function SortingVisualizer() {
             key={index}
             // Note to dev: use css file instead of inline?
             // Also, add the value/numbers inside the div
-            style={{ height: `${value/5}px`, backgroundColor: 'blue', border: 'solid', width: '50px', display: 'inline-block' }}
+            style={{ height: `${value/5}px`, backgroundColor: '#1282A2', border: 'solid', width: '50px', display: 'inline-block' }}
           ></div>
         ))}
       </div>
