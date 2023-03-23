@@ -1,0 +1,13 @@
+.algorithm-choice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  position: absolute;
+  background-color: #001F54;
+  width: 31%;
+  height: 90%;
+  top: 5%;
+  border: #FEFCFB;
+  border-radius: 20px;
+}
