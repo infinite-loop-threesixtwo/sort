@@ -2,12 +2,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: black;
+  color: #FEFCFB;
   position: absolute;
   background-color: #001F54;
-  width: 31%;
-  height: 90%;
-  top: 5%;
+  width: 30%;
+  height: 30%;
+  left: 66%;
   border: #FEFCFB;
   border-radius: 20px;
+  font-size: 3vh;
+}
+
+span.text {
+  color: #FEFCFB;
+  position: absolute;
+  left: 30%;
+  top: 50%;
+  font-size: 5vh;
+  text-align: left;
 }

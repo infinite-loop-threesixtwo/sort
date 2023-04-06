@@ -4,6 +4,7 @@ import Home from "./pages/home";
 import Bubble from "./pages/bubble";
 import NoPage from "./pages/nopage";
 import Layout from "./pages/layout";
+import ThirdLargest from "./pages/thirdlargest";
 export default function App() {
   return (
     <BrowserRouter>
@@ -11,6 +12,7 @@ export default function App() {
         <Route path="/sort/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/sort/bubble" element={<Bubble />} />
+          <Route path="/sort/thirdlargest" element={<ThirdLargest />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

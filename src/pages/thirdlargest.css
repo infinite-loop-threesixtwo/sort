@@ -1,0 +1,101 @@
+/* App.css */
+
+input[type="number"] {
+  width: 50px;
+  margin-right: 5px;
+}
+
+button {
+  margin: 5px;
+}
+
+div {
+  margin-bottom: 10px;
+}
+
+span {
+  font-weight: bold;
+}
+
+
+input[type="number"] {
+  width: 50px;
+  margin-right: 5px;
+}
+
+button {
+  margin: 5px;
+}
+
+div {
+  margin-bottom: 10px;
+  
+  }
+  
+
+
+span {
+  font-weight: bold;
+}
+
+.array-visualizer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.array-container {
+  display: flex;
+  flex-direction: row-reverse;
+  height: 300px;
+  width: 100%;
+  align-items: flex-end;
+
+}
+
+.array-bar {
+  width: 30px;
+  margin: 0 2px;
+  background-color: #0074d9;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.steps-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.step {
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-family: monospace;
+}
+
+body {
+  background-color: #0a1128;
+  color: #fff;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+}
+
+
+
+
+
+
+
+
