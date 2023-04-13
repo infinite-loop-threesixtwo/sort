@@ -13,6 +13,9 @@ function Navbar() {
       <a href="thirdlargest">
         <span className="nav-link">Third Largest</span>
       </a>
+      <a href="merge">
+        <span className="nav-link">Merge Sort</span>
+      </a>
     </nav>
   );
 }

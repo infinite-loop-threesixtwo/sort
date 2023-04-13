@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './bubble.css';
 
-function SortingVisualizer() {
+function Bubble() {
   //This is hacky since it calls the if statement constantly but it works
   useEffect(() => {
     if(!document.getElementsByClassName('bar').length) generateArray();
@@ -82,6 +82,4 @@ function SortingVisualizer() {
   );
 }
 
-export default SortingVisualizer;
-
-// Generate array on start instead of waiting for button?
+export default Bubble;

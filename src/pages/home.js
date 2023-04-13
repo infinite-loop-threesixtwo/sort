@@ -11,7 +11,9 @@ function Home() {
         <a href="thirdlargest">
           <span className="algorithm-choice" key="2" style={{top: '36%'}}>Third Largest</span>
         </a>
-        <div className="algorithm-choice" key="3" style={{top: '67%'}}></div>
+        <a href="merge">
+          <div className="algorithm-choice" key="3" style={{top: '67%'}}>Merge Sort</div>
+        </a>
       </div>
     );
 }
