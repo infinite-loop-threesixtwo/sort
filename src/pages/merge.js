@@ -61,7 +61,7 @@ function Merge() {
             rightIndex++;
             
           }
-          for (let i = 0; i != leftIndex+rightIndex+1; i++) {
+          for (let i = 0; i !== leftIndex+rightIndex+1; i++) {
             bars[i].style.backgroundColor = '#001F54';
           }
           setArray(resultArray.concat(left.slice(leftIndex)).concat(right.slice(rightIndex)));

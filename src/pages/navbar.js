@@ -16,6 +16,9 @@ function Navbar() {
       <a href="merge">
         <span className="nav-link">Merge Sort</span>
       </a>
+      <a href="maxsub">
+        <span className="nav-link">Max Subarray</span>
+      </a>
     </nav>
   );
 }

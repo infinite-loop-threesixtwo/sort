@@ -2,19 +2,41 @@ import React, { useState } from "react";
 import './thirdlargest.css';
 
 function ThirdLargest() {
-  const [n, setN] = useState(3);
   const [arr, setArr] = useState([0, 0, 0]);
   const [steps, setSteps] = useState([]);
-  const [thirdLargest, setThirdLargest] = useState(null);
+  const [thirdLargest_, setThirdLargest] = useState(null);
+  const [thirdLargestNaive, setThirdLargestNaive] = useState(null);
+  const [useNaive, setUseNaive] = useState(false);
 
   const findThirdLargest = (arr) => {
-    // Step 3: Check if the array length is less than 3.
+    let first = null, second = null, third = null;
+    for (let i = 0; i < arr.length; i++) { //iterate array 
+      if (first === null || arr[i] > first) { // If the current element > first largest element, update the first, second, and third
+
+        third = second;
+        second = first;
+        first = arr[i];
+      } else if (second === null || arr[i] > second) { // If the current element <  first largest element, but is  > second largest element, update the second and third largest 
+
+        third = second;
+        second = arr[i];
+      } else if (third === null || arr[i] > third) {  // If the current element  < larger than  first || second largest element, but  > third largest element, update third largest
+
+        third = arr[i];
+      }
+    }
+    return third !== null ? third : first; // If the third largest element found, return ; else, return the first largest
+
+  }
+
+  const findThirdLargestNaive = (arr) => {
+    // Check if the array length is less than 3.
     if (arr.length < 3) {
       return null;
     }
-    // Step 1: Sort the array in descending order.
+    // Sort the array in descending order.
     let sortedArr = arr.sort((a, b) => b - a);
-    // Step 2: Remove duplicates.
+    // Remove duplicates.
     sortedArr = sortedArr.filter((value, index, self) => self.indexOf(value) === index);
     if (sortedArr.length < 3){
         return null;
@@ -26,79 +48,123 @@ function ThirdLargest() {
     // If there are less than 3 unique values in the array return the max value
     return sortedArr[0];
   };
-  
-  function ArrayVisualizer({ arr, steps }) {
-    return (
-      <div className="array-visualizer">
-        <div className="array-container">
-          {arr.map((value, i) => (
-            <div key={i} className="array-bar" style={{ height: `${value * 10}px` }}>
-              {value}
-            </div>
-          ))}
-        </div>
-        <div className="steps-container">
-          {steps.map((arr, i) => (
-            <div key={i} className="step">
-              [{arr.join(", ")}]
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-  
-
-  const handleChangeN = (e) => {
-    const newN = parseInt(e.target.value);
-    if (newN > 3 && newN <= 10) {
-      setN(newN);
-    }
-  };
 
   const handleChangeArr = (e, i) => {
     const newArr = [...arr];
     newArr[i] = parseInt(e.target.value);
     setArr(newArr);
   };
+
+
   const handleClick = () => {
     const sortedArr = [...arr].sort((a, b) => b - a);
+    let currentStep = 1;
     const steps = [];
-    steps.push({
-      step: 1,
-      explanation: `Sort the array ${JSON.stringify(arr)} in descending order using a sorting algorithm. Result: ${JSON.stringify(sortedArr)}`
-    });
-    const thirdLargest = findThirdLargest(sortedArr);
-    steps.push({
-      step: 2,
-      explanation: `Remove duplicate elements from the sorted array 
-      ${JSON.stringify(sortedArr.filter((value, index, self) => self.indexOf(value) === index))}.`
-    });
-    //steps.push({
-      //step: 3,
-    //  explanation: `Check if the length of the array is less than 3.`
-   // });
-    if (thirdLargest !== null) {
+  
+    if (useNaive) {
       steps.push({
-        step: 3,
-        explanation: `If the sorted array has 3 or more unique elements, then return the element at index 2 
-        (which is the third largest element in the array). ${JSON.stringify(sortedArr)}. Result: ${thirdLargest}`
+        step: currentStep++,
+        explanation: `Sort the array ${JSON.stringify(arr)} in descending order using a sorting algorithm. Result: ${JSON.stringify(sortedArr)}`
       });
+  
+      const thirdLargestNaive = findThirdLargestNaive(sortedArr);
+      steps.push({
+        step: currentStep++,
+        explanation: `Remove duplicate elements from the sorted array ${JSON.stringify(sortedArr.filter((value, index, self) => self.indexOf(value) === index))}.`
+      });
+  
+      if (thirdLargestNaive !== null) {
+        steps.push({
+          step: currentStep++,
+          explanation: `If the sorted array has 3 or more unique elements, then return the element at index 2 (which is the third largest element in the array). ${JSON.stringify(sortedArr)}. Result: ${thirdLargestNaive}`
+        });
+      } else {
+        steps.push({
+          step: currentStep++,
+          explanation: `There are less than 3 unique elements in the array ${JSON.stringify(arr)}, so we cannot find the third largest element.`
+        });
+      }
+  
+      setSteps(steps);
+      setThirdLargestNaive(thirdLargestNaive);
+  
     } else {
+
+      const thirdLargest_ = findThirdLargest(arr);
+
       steps.push({
-        step: 3,
-        explanation: `There are less than 3 unique elements in the array ${JSON.stringify(arr)}, so we cannot find the third largest element.`
+        step: currentStep++,
+        explanation: `Initialize the first, second, and third largest elements to null.`
       });
+  
+      let firstLargest = null;
+      let secondLargest = null;
+      let thirdLargest = null;
+  
+      arr.forEach((element) => {
+        steps.push({
+          step: currentStep++,
+          explanation: `Check if ${element} is greater than the first largest element (${firstLargest}.)`
+        });
+  
+        if (element > firstLargest) {
+          steps.push({
+            step: currentStep++,
+            explanation: `Update the first, second, and third largest elements to ${element}, ${firstLargest}, and ${secondLargest}.`
+          });
+  
+          thirdLargest = secondLargest;
+          secondLargest = firstLargest;
+          firstLargest = element;
+  
+        } else if (element > secondLargest || secondLargest === null) {
+          steps.push({
+            step: currentStep++,
+            explanation: `Update the second and third largest elements to ${element} and ${secondLargest}.`
+          });
+  
+          thirdLargest = secondLargest;
+          secondLargest = element;
+  
+        } else if (element > thirdLargest || thirdLargest === null) {
+          steps.push({
+            step: currentStep++,
+            explanation: `Update the third largest element to ${element}.`
+          });
+  
+          thirdLargest = element;
+        }
+      });
+  
+      if (thirdLargest !== null) {
+        steps.push({
+          step: currentStep++,
+          explanation: `The third largest element in the array ${JSON.stringify(arr)} is ${thirdLargest}.`
+        });
+      } else {
+        steps.push({
+          step: currentStep++,
+          explanation: `There are less than 3 unique elements in the array ${JSON.stringify(arr)}, so we cannot find the third largest element.`
+        });
+      }
+  
+      setSteps(steps);
+      setThirdLargest(thirdLargest_);
     }
-    setSteps(steps);
-    setThirdLargest(thirdLargest);
   };
   
   
 
+  const handleToggle = () => {
+    setUseNaive(!useNaive);
+    
+  };
+
+
   const handleReset = () => {
     setArr([0, 0, 0]);
     setSteps([]);
+    setThirdLargestNaive(null);
     setThirdLargest(null);
   };
 
@@ -114,11 +180,12 @@ function ThirdLargest() {
     setArr(newArr);
   };
 
+  
   return (
     <div>
       <h1>Third Largest Element</h1>
-      <p>Algorithm: 3rd Max in Array: Naive Approach</p>
-      <p>Time Complexity: O(n log n) </p>
+      <p>Algorithm: 3rd Max in Array: {useNaive ? "Naive" : "Good Approach"}</p>
+      <p>Time Complexity: {useNaive ? "O(n log n)" : "O(n)"}</p> 
       <p>Enter the values for the array:</p>
       {arr.map((value, i) => (
         <div key={i}>
@@ -136,12 +203,14 @@ function ThirdLargest() {
   ))}
 </p>
 
-
-      <button onClick={handleClick}>Find Third Largest Element</button>
-      <button onClick={handleReset}>Reset</button>
-      <p>
-        Expected Third Largest Element: {thirdLargest === null ? "-" : thirdLargest}
+<p>
+        Expected Third Largest Element: {useNaive ? thirdLargestNaive : thirdLargest_ }
+        
       </p>
+      <button onClick={handleClick}>Find Third Largest Element</button>
+      <button onClick={handleToggle}>{useNaive ? "Use Efficient Algorithm" : "Use Naive Algorithm"}</button>
+      <button onClick={handleReset}>Reset</button>
+     
     </div>
   );
 }
