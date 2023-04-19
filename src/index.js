@@ -7,6 +7,7 @@ import Layout from "./pages/layout";
 import ThirdLargest from "./pages/thirdlargest";
 import Merge from "./pages/merge";
 import MaxSub from "./pages/maxsub";
+import "./index.css";
 export default function App() {
   return (
     <BrowserRouter>

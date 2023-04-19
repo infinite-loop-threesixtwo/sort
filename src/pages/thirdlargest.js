@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import './thirdlargest.css';
 
 function ThirdLargest() {
   const [arr, setArr] = useState([0, 0, 0]);
@@ -183,7 +182,7 @@ function ThirdLargest() {
   
   return (
     <div>
-      <h1>Third Largest Element</h1>
+      <div className="title">Third Largest Element</div>
       <p>Algorithm: 3rd Max in Array: {useNaive ? "Naive" : "Good Approach"}</p>
       <p>Time Complexity: {useNaive ? "O(n log n)" : "O(n)"}</p> 
       <p>Enter the values for the array:</p>

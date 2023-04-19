@@ -57,20 +57,21 @@ function MaxContiguousSubarray() {
         Given an array of integers, find the contiguous subarray with the largest sum.<br />
         Time complexity: O(n^2)
       </div>
-      <div className="array-input">
-        <label htmlFor="arrayInput">Input Array:</label>
-        <input type="text" id="arrayInput" onChange={handleArrayChange} />
+      <div className="buttons">
+        <div className="array-input">
+          <label htmlFor="arrayInput">Input Array:</label>
+          <input type="text" id="arrayInput" onChange={handleArrayChange} />
+        </div>
+        <button onClick={findMaxContiguousSubarray}>Find Max Contiguous Subarray</button>
       </div>
-      <button onClick={findMaxContiguousSubarray}>Find Max Contiguous Subarray</button>
       <p></p>
       <div className="result">
         {result.map((step, index) => (
           <div key={index}>
             {step.done ? (
               <div>
-                <b>Max sum:</b> {step.maxSum}<br />
-                <b>Start index:</b> {step.maxStart}<br />
-                <b>End index:</b> {step.maxEnd}<br />
+                <b>Max Sum:</b> {step.maxSum}<br />
+                <b>Max Sub-Array:</b> {RenderSubArray(step.maxStart,step.maxEnd)}<br />
               </div>
             ) : (
               <div>

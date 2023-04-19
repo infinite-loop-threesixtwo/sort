@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './merge.css';
 
 function Merge() {
   //This is hacky since it calls the if statement constantly but it works
