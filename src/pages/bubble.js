@@ -6,6 +6,7 @@ function Bubble() {
     if(!document.getElementsByClassName('bar').length) generateArray();
   });
   const [array, setArray] = useState([]);
+  const [ timeTaken, setTimeTaken] = useState(null);
 
   // Generate random array
   const generateArray = () => {
@@ -23,6 +24,7 @@ function Bubble() {
   
   // Bubble Sort Algorithm
   const bubbleSort = async () => {
+    const startTime = performance.now();
     const len = array.length;
     const newArray = [...array];
     for (let i = 0; i < len; i++) {
@@ -52,6 +54,8 @@ function Bubble() {
         );
       }
     }
+    const endTime = performance.now();
+    setTimeTaken((endTime - startTime).toFixed(4));
   };
 
   return (
@@ -60,6 +64,8 @@ function Bubble() {
       <div className="description">
         Bubble sort is a simple algorithm that repeatedly compares adjacent elements in a list and swaps them if they are in the wrong order until the list is in order <br></br>
         <b>Time complexity: O(N^2)</b>
+        <p>Run Time: {timeTaken * 1000} μs</p> 
+        <p>(Keep in mind there is a 1 second sleep inbetween steps for visualization)</p>
       </div>
       <div className="bars-container">
         {array.map((value, index) => (

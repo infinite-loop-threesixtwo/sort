@@ -6,6 +6,7 @@ function Merge() {
     if(!document.getElementsByClassName('bar').length) generateArray();
   });
   const [array, setArray] = useState([]);
+  const [timeTaken, setTimeTaken] = useState(null);
 
   // Generate random array
   const generateArray = () => {
@@ -23,12 +24,16 @@ function Merge() {
   
   // Click handler, so we can pass array
   const handleMergeSort = async () => {
+    const startTime = performance.now();
     const sortedArray = await mergeSort(array);
+    const endTime = performance.now();
+    setTimeTaken((endTime - startTime).toFixed(4));
     setArray(sortedArray);
   };
   
   // Merge Sort Algorithm
   const mergeSort = async (array) => {
+    
     const len = array.length;
     if (len <= 1) {
       return array; // base case
@@ -38,6 +43,7 @@ function Merge() {
     const rightArray = array.slice(mid);
     const sortedLeftArray = await mergeSort(leftArray);
     const sortedRightArray = await mergeSort(rightArray);
+    
     return merge(sortedLeftArray, sortedRightArray);
   };
 
@@ -49,7 +55,7 @@ function Merge() {
 
     while (leftIndex < left.length && rightIndex < right.length) {
       const bars = document.getElementsByClassName("bar");
-
+      // eslint-disable-next-line
       await new Promise((resolve) =>
         setTimeout(() => {
           if (left[leftIndex] < right[rightIndex]) {
@@ -80,6 +86,8 @@ function Merge() {
       <div className="description">
         Merge sort is an efficient, general-purpose, and comparison-based sorting algorithm. It works on the principle of dividing the array into many halves and merging them in a sorted manner. <br></br>
         <b>Time complexity: O(N log N)</b>
+        <p>Run Time: {timeTaken * 1000} μs</p> 
+        <p>(Keep in mind there is a 1 second sleep inbetween steps for visualization)</p>
       </div>
       <div className="bars-container">
         {array.map((value, index) => (
